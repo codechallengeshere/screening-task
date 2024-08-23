@@ -71,14 +71,14 @@ public class ApplicationExceptionHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    protected ResponseEntity<ApiErrorResponseDto> handleHttpMessageNotReadableException(final HttpMessageNotReadableException httpMessageNotReadableException) {
+    protected ResponseEntity<ApiErrorResponseDto> handleHttpMessageNotReadableException() {
         log.error("ApplicationExceptionHandler#handleHttpMessageNotReadableException: start");
 
         final var httpStatus = HttpStatus.BAD_REQUEST;
 
         final var apiException = new ApiException(
                 ApplicationErrorCodeConstant.ERROR_CODE__VALIDATION_ERROR,
-                ApplicationErrorMessageConstant.ERROR_MESSAGE__MISSING_REQUIRED_PARAMS,
+                ApplicationErrorMessageConstant.ERROR_MESSAGE__REQUIRED_PARAMS_ERROR,
                 httpStatus
         );
 

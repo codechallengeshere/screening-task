@@ -41,7 +41,7 @@ public class EmployeeEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "department", nullable = false, length = 50)
-    private DepartmentEnumeration departmentEnumeration;
+    private DepartmentEnumeration department;
 
     @CreationTimestamp
     @Column(name = "employed_at", nullable = false)

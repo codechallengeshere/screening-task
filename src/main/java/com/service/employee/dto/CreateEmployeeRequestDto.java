@@ -1,7 +1,7 @@
 package com.service.employee.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.service.employee.validator.DepartmentEnumeration;
+import com.service.employee.enumeration.DepartmentEnumeration;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,6 @@ public class CreateEmployeeRequestDto {
     @JsonProperty(value = "name")
     private String name;
 
-    @DepartmentEnumeration
     @JsonProperty(value = "department")
-    private String department;
+    private DepartmentEnumeration department;
 }

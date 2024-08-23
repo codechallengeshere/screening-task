@@ -43,8 +43,6 @@
         <mapstruct-processor.version>1.6.0</mapstruct-processor.version>
         <lombok.version>1.18.34</lombok.version>
         <commons-lang3.version>3.16.0</commons-lang3.version>
-
-        <junit-jupiter-engine.version>5.11.0</junit-jupiter-engine.version>
     </properties>
 
     <dependencies>
@@ -90,10 +88,10 @@
             <version>${jackson-datatype-jsr310.version}</version>
         </dependency>
 
+        <!-- managed by spring -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter-engine.version}</version>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
