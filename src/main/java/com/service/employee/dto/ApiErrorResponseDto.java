@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ApiErrorResponse {
+public class ApiErrorResponseDto {
 
     @JsonIgnore
     @JsonProperty(value = "status_code")
