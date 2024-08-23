@@ -18,20 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
 @Tag(name = "Employee Controller", description = "Endpoints for employees")
 @RestController
-@RequestMapping(
-        value = EmployeeControllerConstant.EMPLOYEE_CONTROLLER_ENDPOINT_PREFIX_PATH,
-        consumes = MediaType.APPLICATION_JSON_VALUE,
-        produces = MediaType.APPLICATION_JSON_VALUE
-)
+@RequestMapping(value = EmployeeControllerConstant.EMPLOYEE_CONTROLLER_ENDPOINT_PREFIX_PATH)
 public class EmployeeController {
 
     private final JsonComponent jsonComponent;
@@ -89,5 +82,31 @@ public class EmployeeController {
 
         log.debug("EmployeeController#createEmployee: end: " + jsonComponent.convertObjectToJsonString(createEmployeeResponseDto));
         return new ResponseEntity<>(createEmployeeResponseDto, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Delete Employee",
+            description = "Delete employee using employee id"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "Successful operation"
+                    )
+            }
+    )
+    @DeleteMapping(
+            value = EmployeeControllerConstant.DELETE_EMPLOYEES_ENDPOINT_PATH
+    )
+    public ResponseEntity<Void> deleteEmployee(
+            @PathVariable(name = "id", required = true) final long employeeId
+    ) {
+        log.debug("EmployeeController#deleteEmployee: start: id: " + employeeId);
+
+        employeeService.deleteEmployee(employeeId);
+
+        log.debug("EmployeeController#createEmployee: end");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

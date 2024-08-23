@@ -9,24 +9,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 
 public abstract class EmployeeApplicationUnitTest {
 
-    protected JsonComponent jsonComponent;
-
-    @Spy
-    protected EmployeeMapper entityMapperSpy;
-
     @Mock
     protected EmployeeRepository employeeRepositoryMock;
+
+    protected JsonComponent jsonComponent;
+    protected EmployeeMapper entityMapper;
 
     @BeforeEach
     protected void beforeEach() {
         final var objectMapper = new ObjectMapper();
 
         this.jsonComponent = new JsonComponent(objectMapper);
-        this.entityMapperSpy = Mappers.getMapper(EmployeeMapper.class);
+        this.entityMapper = Mappers.getMapper(EmployeeMapper.class);
         this.employeeRepositoryMock = Mockito.mock(EmployeeRepository.class);
     }
 

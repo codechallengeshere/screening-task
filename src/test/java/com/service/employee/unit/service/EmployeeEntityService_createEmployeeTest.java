@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
-class EmployeeEntityServiceTest extends EmployeeApplicationUnitTest {
+class EmployeeEntityService_createEmployeeTest extends EmployeeApplicationUnitTest {
 
     private EmployeeService employeeService;
 
@@ -24,7 +24,7 @@ class EmployeeEntityServiceTest extends EmployeeApplicationUnitTest {
 
         this.employeeService = new EmployeeService(
                 jsonComponent,
-                entityMapperSpy,
+                entityMapper,
                 employeeRepositoryMock
         );
     }
@@ -40,7 +40,7 @@ class EmployeeEntityServiceTest extends EmployeeApplicationUnitTest {
                 .department(departmentEnumeration)
                 .build();
 
-        final EmployeeEntity employeeEntity = entityMapperSpy.fromDto(createEmployeeRequestDto);
+        final EmployeeEntity employeeEntity = entityMapper.fromDto(createEmployeeRequestDto);
         employeeEntity.setId(employeeId);
 
         doReturn(employeeEntity)

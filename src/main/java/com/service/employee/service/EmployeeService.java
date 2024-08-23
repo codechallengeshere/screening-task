@@ -32,7 +32,7 @@ public class EmployeeService {
 
         final EmployeeEntity employeeEntity = employeeMapper.fromDto(createEmployeeRequestDto);
         employeeEntity.setEmployedAt(Date.from(Instant.now()));
-        
+
         final EmployeeEntity savedEmployeeEntity = saveEmployee(employeeEntity);
         final CreateEmployeeResponseDto createEmployeeResponseDto = employeeMapper.toDto(savedEmployeeEntity);
 
@@ -58,5 +58,13 @@ public class EmployeeService {
 
         log.debug("EmployeeService#saveEmployee: end: " + jsonComponent.convertObjectToJsonString(savedEmployeeEntity));
         return savedEmployeeEntity;
+    }
+
+    public void deleteEmployee(final long employeeId) {
+        log.debug("EmployeeService#deleteEmployee: start: " + jsonComponent.convertObjectToJsonString(employeeId));
+
+        employeeRepository.deleteById(employeeId);
+
+        log.debug("EmployeeService#deleteEmployee: end");
     }
 }
