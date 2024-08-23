@@ -43,6 +43,7 @@
         <mapstruct-processor.version>1.6.0</mapstruct-processor.version>
         <lombok.version>1.18.34</lombok.version>
         <commons-lang3.version>3.16.0</commons-lang3.version>
+        <javafaker.version>1.0.2</javafaker.version>
     </properties>
 
     <dependencies>
@@ -190,6 +191,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
         </dependency>
     </dependencies>
 

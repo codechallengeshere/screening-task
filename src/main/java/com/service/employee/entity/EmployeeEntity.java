@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
@@ -43,7 +42,6 @@ public class EmployeeEntity {
     @Column(name = "department", nullable = false, length = 50)
     private DepartmentEnumeration department;
 
-    @CreationTimestamp
     @Column(name = "employed_at", nullable = false)
     private Date employedAt;
 }

@@ -12,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.util.Date;
+
 import static com.service.employee.constant.ApplicationErrorCodeConstant.ERROR_CODE__INTERNAL_SERVER_ERROR;
 import static com.service.employee.constant.ApplicationErrorMessageConstant.ERROR_MESSAGE__INTERNAL_SERVER_ERROR;
 
@@ -28,6 +31,8 @@ public class EmployeeService {
         log.debug("EmployeeService#createEmployee: start: " + jsonComponent.convertObjectToJsonString(createEmployeeRequestDto));
 
         final EmployeeEntity employeeEntity = employeeMapper.fromDto(createEmployeeRequestDto);
+        employeeEntity.setEmployedAt(Date.from(Instant.now()));
+        
         final EmployeeEntity savedEmployeeEntity = saveEmployee(employeeEntity);
         final CreateEmployeeResponseDto createEmployeeResponseDto = employeeMapper.toDto(savedEmployeeEntity);
 

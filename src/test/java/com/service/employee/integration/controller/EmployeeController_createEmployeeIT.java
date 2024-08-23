@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 import java.nio.charset.StandardCharsets;
-import java.time.Instant;
-import java.util.Date;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.doReturn;
@@ -25,7 +23,6 @@ class EmployeeController_createEmployeeIT extends EmployeeEntityApplicationInteg
         final long employeeId = 1L;
         final String name = "name";
         final var department = DepartmentEnumeration.DIGITAL;
-        final Date employedAt = Date.from(Instant.now());
 
         final CreateEmployeeRequestDto createEmployeeRequestDto = CreateEmployeeRequestDto.builder()
                 .name(name)
@@ -34,7 +31,6 @@ class EmployeeController_createEmployeeIT extends EmployeeEntityApplicationInteg
 
         final EmployeeEntity employeeEntity = entityMapperSpy.fromDto(createEmployeeRequestDto);
         employeeEntity.setId(employeeId);
-        employeeEntity.setEmployedAt(employedAt);
 
         doReturn(employeeEntity)
                 .when(employeeRepositoryMockBean)

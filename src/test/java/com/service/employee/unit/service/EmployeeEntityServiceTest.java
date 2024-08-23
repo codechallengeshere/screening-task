@@ -10,9 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-import java.util.Date;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
@@ -37,7 +34,6 @@ class EmployeeEntityServiceTest extends EmployeeApplicationUnitTest {
         final long employeeId = 1L;
         final String name = "name";
         final var departmentEnumeration = DepartmentEnumeration.DIGITAL;
-        final Date employedAt = Date.from(Instant.now());
 
         final CreateEmployeeRequestDto createEmployeeRequestDto = CreateEmployeeRequestDto.builder()
                 .name(name)
@@ -46,7 +42,6 @@ class EmployeeEntityServiceTest extends EmployeeApplicationUnitTest {
 
         final EmployeeEntity employeeEntity = entityMapperSpy.fromDto(createEmployeeRequestDto);
         employeeEntity.setId(employeeId);
-        employeeEntity.setEmployedAt(employedAt);
 
         doReturn(employeeEntity)
                 .when(employeeRepositoryMock)
