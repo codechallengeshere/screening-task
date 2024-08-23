@@ -60,13 +60,13 @@ public class EmployeeController {
     public ResponseEntity<List<EmployeeDto>> readEmployees(
             @RequestParam(name = "limit", required = false, defaultValue = "10") final Integer limit,
             @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page,
-            @RequestParam(name = "department", required = false) final DepartmentEnumeration department,
+            @RequestParam(name = "department", required = false) final String department,
             @RequestParam(name = "employed_at_year", required = false) final Integer employedAtYear
     ) {
         final ReadEmployeesFilterDto readEmployeesFilterDto = new ReadEmployeesFilterDto();
         readEmployeesFilterDto.setLimit(limit);
         readEmployeesFilterDto.setPage(ObjectUtils.isEmpty(page) || page < 0 ? 0 : page - 1);
-        readEmployeesFilterDto.setDepartment(department);
+        readEmployeesFilterDto.setDepartment(ObjectUtils.isEmpty(department) ? null : DepartmentEnumeration.fromValue(department));
         readEmployeesFilterDto.setEmployedAtYear(employedAtYear);
 
         log.debug("EmployeeController#readEmployees: start: " + jsonComponent.convertObjectToJsonString(readEmployeesFilterDto));

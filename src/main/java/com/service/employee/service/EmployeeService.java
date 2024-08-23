@@ -45,12 +45,12 @@ public class EmployeeService {
                 Sort.by(Sort.Direction.ASC, "id")
         );
 
-        final List<EmployeeEntity> employeeEntities;
+        final Page<EmployeeEntity> employeeEntityPage;
         if (ObjectUtils.isNotEmpty(readEmployeesFilterDto.getEmployedAtYear()) && ObjectUtils.isNotEmpty(readEmployeesFilterDto.getDepartment())) {
             final Date dateFrom = getDateFrom(readEmployeesFilterDto.getEmployedAtYear());
             final Date dateTo = getDateTo(readEmployeesFilterDto.getEmployedAtYear());
 
-            employeeEntities = employeeRepository.findAllByEmployedAtIsBetweenAndDepartment(
+            employeeEntityPage = employeeRepository.findAllByEmployedAtIsBetweenAndDepartment(
                     dateFrom,
                     dateTo,
                     readEmployeesFilterDto.getDepartment(),
@@ -60,23 +60,21 @@ public class EmployeeService {
             final Date dateFrom = getDateFrom(readEmployeesFilterDto.getEmployedAtYear());
             final Date dateTo = getDateTo(readEmployeesFilterDto.getEmployedAtYear());
 
-            employeeEntities = employeeRepository.findAllByEmployedAtIsBetween(
+            employeeEntityPage = employeeRepository.findAllByEmployedAtIsBetween(
                     dateFrom,
                     dateTo,
                     pageRequest
             );
         } else if (ObjectUtils.isEmpty(readEmployeesFilterDto.getEmployedAtYear()) && ObjectUtils.isNotEmpty(readEmployeesFilterDto.getDepartment())) {
-            employeeEntities = employeeRepository.findByDepartment(
+            employeeEntityPage = employeeRepository.findAllByDepartment(
                     readEmployeesFilterDto.getDepartment(),
                     pageRequest
             );
         } else {
-            final Page<EmployeeEntity> employeeEntityPage = employeeRepository.findAll(pageRequest);
-
-            employeeEntities = employeeEntityPage.stream().toList();
+            employeeEntityPage = employeeRepository.findAll(pageRequest);
         }
 
-        final List<EmployeeDto> employeeDtos = employeeEntities.stream()
+        final List<EmployeeDto> employeeDtos = employeeEntityPage.stream()
                 .map(employeeMapper::toDto)
                 .toList();
 

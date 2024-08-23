@@ -49,7 +49,6 @@ public class FixturesLoadRunner implements ApplicationRunner {
 
         final List<EmployeeEntity> employeeEntities = new ArrayList<>(INITIAL_CAPACITY);
         for (int i = 0; i <= INITIAL_CAPACITY; i++) {
-
             final EmployeeEntity employeeEntity = EmployeeEntity.builder()
                     .name(faker.name().firstName())
                     .department(departmentEnumerations[RandomUtils.nextInt(0, departmentEnumerations.length)])

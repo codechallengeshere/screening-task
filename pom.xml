@@ -43,6 +43,7 @@
         <mapstruct-processor.version>1.6.0</mapstruct-processor.version>
         <lombok.version>1.18.34</lombok.version>
         <commons-lang3.version>3.16.0</commons-lang3.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
         <javafaker.version>1.0.2</javafaker.version>
     </properties>
 
@@ -107,6 +108,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
         </dependency>
 
         <dependency>

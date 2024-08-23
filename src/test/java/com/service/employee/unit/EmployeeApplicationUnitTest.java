@@ -1,6 +1,7 @@
 package com.service.employee.unit;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import com.service.employee.component.JsonComponent;
 import com.service.employee.mapper.EmployeeMapper;
 import com.service.employee.repository.EmployeeRepository;
@@ -17,12 +18,15 @@ public abstract class EmployeeApplicationUnitTest {
 
     protected JsonComponent jsonComponent;
     protected EmployeeMapper entityMapper;
+    protected Faker faker;
 
     @BeforeEach
     protected void beforeEach() {
         final var objectMapper = new ObjectMapper();
 
         this.jsonComponent = new JsonComponent(objectMapper);
+        this.faker = new Faker();
+
         this.entityMapper = Mappers.getMapper(EmployeeMapper.class);
         this.employeeRepositoryMock = Mockito.mock(EmployeeRepository.class);
     }

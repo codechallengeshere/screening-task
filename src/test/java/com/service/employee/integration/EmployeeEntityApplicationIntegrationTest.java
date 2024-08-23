@@ -1,6 +1,7 @@
 package com.service.employee.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import com.service.employee.mapper.EmployeeMapper;
 import com.service.employee.repository.EmployeeRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -52,9 +53,12 @@ public abstract class EmployeeEntityApplicationIntegrationTest {
     @MockBean
     protected EmployeeRepository employeeRepositoryMockBean;
 
+    protected Faker faker;
+
     @BeforeEach
     void beforeEach() {
         this.entityMapperSpy = Mappers.getMapper(EmployeeMapper.class);
+        this.faker = new Faker();
     }
 
     @AfterEach
