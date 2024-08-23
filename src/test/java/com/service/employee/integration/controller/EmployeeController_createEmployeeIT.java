@@ -4,7 +4,7 @@ import com.service.employee.constant.EmployeeControllerConstant;
 import com.service.employee.dto.CreateEmployeeRequestDto;
 import com.service.employee.entity.EmployeeEntity;
 import com.service.employee.enumeration.DepartmentEnumeration;
-import com.service.employee.integration.EmployeeEntityApplicationIntegrationTest;
+import com.service.employee.integration.EmployeeApplicationIntegrationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class EmployeeController_createEmployeeIT extends EmployeeEntityApplicationIntegrationTest {
+class EmployeeController_createEmployeeIT extends EmployeeApplicationIntegrationTest {
 
     @Test
     void success() throws Exception {

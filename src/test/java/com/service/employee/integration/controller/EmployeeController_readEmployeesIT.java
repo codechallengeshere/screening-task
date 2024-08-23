@@ -3,7 +3,7 @@ package com.service.employee.integration.controller;
 import com.service.employee.constant.EmployeeControllerConstant;
 import com.service.employee.entity.EmployeeEntity;
 import com.service.employee.enumeration.DepartmentEnumeration;
-import com.service.employee.integration.EmployeeEntityApplicationIntegrationTest;
+import com.service.employee.integration.EmployeeApplicationIntegrationTest;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageImpl;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class EmployeeController_readEmployeesIT extends EmployeeEntityApplicationIntegrationTest {
+class EmployeeController_readEmployeesIT extends EmployeeApplicationIntegrationTest {
 
     @Test
     void success_noDepartment_noEmployedAtYear() throws Exception {

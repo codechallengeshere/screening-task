@@ -16,7 +16,7 @@ import java.util.Date;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
-class EmployeeEntityService_createEmployeeTest extends EmployeeApplicationUnitTest {
+class EmployeeService_createEmployeeTest extends EmployeeApplicationUnitTest {
 
     private EmployeeService employeeService;
 

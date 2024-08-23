@@ -24,7 +24,7 @@ import java.util.List;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
-class EmployeeEntityService_readEmployeesTest extends EmployeeApplicationUnitTest {
+class EmployeeService_readEmployeesTest extends EmployeeApplicationUnitTest {
 
     private EmployeeService employeeService;
 

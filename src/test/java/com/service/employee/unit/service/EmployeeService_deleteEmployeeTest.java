@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 
-class EmployeeEntityService_deleteEmployeeTest extends EmployeeApplicationUnitTest {
+class EmployeeService_deleteEmployeeTest extends EmployeeApplicationUnitTest {
 
     private EmployeeService employeeService;
 

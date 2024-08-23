@@ -39,7 +39,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 @SpringBootTest
-public abstract class EmployeeEntityApplicationIntegrationTest {
+public abstract class EmployeeApplicationIntegrationTest {
 
     @Autowired
     protected MockMvc mockMvc;

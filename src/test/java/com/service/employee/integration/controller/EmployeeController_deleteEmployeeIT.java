@@ -1,7 +1,7 @@
 package com.service.employee.integration.controller;
 
 import com.service.employee.constant.EmployeeControllerConstant;
-import com.service.employee.integration.EmployeeEntityApplicationIntegrationTest;
+import com.service.employee.integration.EmployeeApplicationIntegrationTest;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.any;
@@ -9,7 +9,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class EmployeeController_deleteEmployeeIT extends EmployeeEntityApplicationIntegrationTest {
+class EmployeeController_deleteEmployeeIT extends EmployeeApplicationIntegrationTest {
 
     @Test
     void success() throws Exception {
