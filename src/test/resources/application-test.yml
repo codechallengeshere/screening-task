@@ -1,0 +1,26 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: employee-test
+
+management:
+  endpoint:
+    health:
+      enabled: false
+    info:
+      enabled: false
+  endpoints:
+    web:
+      discovery:
+        enabled: false
+    enabled-by-default: false
+
+logging:
+  config: src/test/resources/logback-test.xml
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.test.context.cache: INFO
+    com.service.employee: INFO

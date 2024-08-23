@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: employee-dev
+  datasource:
+    url: jdbc:h2:mem:employee-dev
+    driverClassName: org.h2.Driver
+    username: admin
+    password: password
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+
+management:
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+  endpoints:
+    web:
+      discovery:
+        enabled: false
+    enabled-by-default: true
+
+logging:
+  config: src/main/resources/logback-dev.xml
+  level:
+    com.service.employee: DEBUG
+
+app:
+  fixtures:
+    enabled: true
