@@ -84,7 +84,7 @@ public class ApplicationExceptionHandler {
 
         final var apiErrorResponseDto = getApiErrorResponseDto(apiException);
 
-        log.debug("ApplicationExceptionHandler#handleHttpMessageNotReadableException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        log.error("ApplicationExceptionHandler#handleHttpMessageNotReadableException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
         return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
     }
 

@@ -4,7 +4,9 @@ import com.service.employee.component.JsonComponent;
 import com.service.employee.constant.EmployeeControllerConstant;
 import com.service.employee.dto.ApiErrorResponseDto;
 import com.service.employee.dto.CreateEmployeeRequestDto;
-import com.service.employee.dto.CreateEmployeeResponseDto;
+import com.service.employee.dto.EmployeeDto;
+import com.service.employee.dto.ReadEmployeesFilterDto;
+import com.service.employee.enumeration.DepartmentEnumeration;
 import com.service.employee.service.EmployeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,10 +17,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -31,8 +36,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @Operation(
-            summary = "Create Employee",
-            description = "Create employee using name and department"
+            summary = "Get Employees",
+            description = "Get employees"
     )
     @ApiResponses(
             value = {
@@ -42,7 +47,49 @@ public class EmployeeController {
                             content = @Content(
                                     mediaType = "application/json",
                                     schema = @Schema(
-                                            implementation = CreateEmployeeResponseDto.class
+                                            implementation = EmployeeDto.class
+                                    )
+                            )
+                    )
+            }
+    )
+    @GetMapping(
+            value = EmployeeControllerConstant.READ_EMPLOYEES_ENDPOINT_PATH,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<EmployeeDto>> readEmployees(
+            @RequestParam(name = "limit", required = false, defaultValue = "10") final Integer limit,
+            @RequestParam(name = "page", required = false, defaultValue = "1") final Integer page,
+            @RequestParam(name = "department", required = false) final DepartmentEnumeration department,
+            @RequestParam(name = "employed_at_year", required = false) final Integer employedAtYear
+    ) {
+        final ReadEmployeesFilterDto readEmployeesFilterDto = new ReadEmployeesFilterDto();
+        readEmployeesFilterDto.setLimit(limit);
+        readEmployeesFilterDto.setPage(ObjectUtils.isEmpty(page) || page < 0 ? 0 : page - 1);
+        readEmployeesFilterDto.setDepartment(department);
+        readEmployeesFilterDto.setEmployedAtYear(employedAtYear);
+
+        log.debug("EmployeeController#readEmployees: start: " + jsonComponent.convertObjectToJsonString(readEmployeesFilterDto));
+
+        final List<EmployeeDto> employeeDtos = employeeService.readEmployees(readEmployeesFilterDto);
+
+        log.debug("EmployeeController#readEmployees: end: " + jsonComponent.convertObjectToJsonString(employeeDtos));
+        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+    }
+
+    @Operation(
+            summary = "Create Employee",
+            description = "Create employee using name and department"
+    )
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Successful operation",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(
+                                            implementation = EmployeeDto.class
                                     )
                             )
                     ),
@@ -73,15 +120,15 @@ public class EmployeeController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<CreateEmployeeResponseDto> createEmployee(
+    public ResponseEntity<EmployeeDto> createEmployee(
             @Valid @RequestBody final CreateEmployeeRequestDto createEmployeeRequestDto
     ) {
         log.debug("EmployeeController#createEmployee: start: " + jsonComponent.convertObjectToJsonString(createEmployeeRequestDto));
 
-        final var createEmployeeResponseDto = employeeService.createEmployee(createEmployeeRequestDto);
+        final EmployeeDto employeeDto = employeeService.createEmployee(createEmployeeRequestDto);
 
-        log.debug("EmployeeController#createEmployee: end: " + jsonComponent.convertObjectToJsonString(createEmployeeResponseDto));
-        return new ResponseEntity<>(createEmployeeResponseDto, HttpStatus.OK);
+        log.debug("EmployeeController#createEmployee: end: " + jsonComponent.convertObjectToJsonString(employeeDto));
+        return new ResponseEntity<>(employeeDto, HttpStatus.CREATED);
     }
 
     @Operation(

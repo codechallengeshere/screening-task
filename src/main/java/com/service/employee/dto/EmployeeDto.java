@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateEmployeeResponseDto {
+public class EmployeeDto {
 
     @JsonProperty(value = "id")
     private Long id;
@@ -20,4 +20,7 @@ public class CreateEmployeeResponseDto {
 
     @JsonProperty(value = "department")
     private String department;
+
+    @JsonProperty(value = "employed_at")
+    private String employedAt;
 }

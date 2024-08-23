@@ -64,14 +64,14 @@ public class FixturesLoadRunner implements ApplicationRunner {
         log.debug("FixturesLoadRunner#insertRandomEmployees: end");
     }
 
-    private static Date getDateFrom() {
+    private Date getDateFrom() {
         final LocalDate localDate = LocalDate.now().minusYears(3);
         final Instant instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
         return Date.from(instant);
     }
 
-    private static Date getDateTo() {
+    private Date getDateTo() {
         final LocalDate localDate = LocalDate.now().plusYears(3);
         final Instant instant = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
 

@@ -1,7 +1,7 @@
 package com.service.employee.mapper;
 
 import com.service.employee.dto.CreateEmployeeRequestDto;
-import com.service.employee.dto.CreateEmployeeResponseDto;
+import com.service.employee.dto.EmployeeDto;
 import com.service.employee.entity.EmployeeEntity;
 import org.mapstruct.Mapper;
 
@@ -10,5 +10,5 @@ public interface EmployeeMapper {
 
     EmployeeEntity fromDto(CreateEmployeeRequestDto createEmployeeRequestDto);
 
-    CreateEmployeeResponseDto toDto(EmployeeEntity employeeEntity);
+    EmployeeDto toDto(EmployeeEntity employeeEntity);
 }
