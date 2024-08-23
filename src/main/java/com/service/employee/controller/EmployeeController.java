@@ -79,7 +79,7 @@ public class EmployeeController {
 
     @Operation(
             summary = "Create Employee",
-            description = "Create employee using name and department"
+            description = "Create employee"
     )
     @ApiResponses(
             value = {
@@ -133,7 +133,7 @@ public class EmployeeController {
 
     @Operation(
             summary = "Delete Employee",
-            description = "Delete employee using employee id"
+            description = "Delete employee"
     )
     @ApiResponses(
             value = {
