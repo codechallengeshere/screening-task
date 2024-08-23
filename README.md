@@ -18,13 +18,13 @@
 **For Production environment:**
 
 * run docker task `services.postgres` from `docker/docker-compose.yml` path to up postgresql instance
+* in active profiles do not input any value
 * run EmployeeApplication
 
 **For Development environment:**
 
 * no need to setup and run postgresql instance because h2 in memory database configured
 * for development purposes input `dev` into profile
-* in active profiles use no profile or input `dev` value
 * for development purposes in `application-dev.yml` flag `app.fixtures.enabled` is set to `true` by default:
     * this will generate random data of employees using `using com.service.employee.runner.FixturesLoadRunner` class
 
