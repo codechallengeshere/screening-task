@@ -4,7 +4,10 @@ import com.service.employee.component.JsonComponent;
 import com.service.employee.constant.ApplicationErrorCodeConstant;
 import com.service.employee.constant.ApplicationErrorMessageConstant;
 import com.service.employee.dto.ApiErrorResponseDto;
-import com.service.employee.exception.*;
+import com.service.employee.exception.ApiException;
+import com.service.employee.exception.BaseException;
+import com.service.employee.exception.DepartmentNotValidException;
+import com.service.employee.exception.EmployeeNotCreatedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -27,18 +30,6 @@ import java.util.Map;
 public class ApplicationExceptionHandler {
 
     private final JsonComponent jsonComponent;
-
-    @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<ApiErrorResponseDto> handleEmployeeNotFoundException(final EmployeeNotFoundException employeeNotFoundException) {
-        log.error("ApplicationExceptionHandler#handleEmployeeNotFoundException: start: " + jsonComponent.convertObjectToJsonString(employeeNotFoundException));
-
-        final var httpStatus = employeeNotFoundException.getHttpStatus();
-
-        final var apiErrorResponseDto = getApiErrorResponseDto(employeeNotFoundException);
-
-        log.debug("ApplicationExceptionHandler#handleEmployeeNotFoundException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
-        return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
-    }
 
     @ExceptionHandler(EmployeeNotCreatedException.class)
     public ResponseEntity<ApiErrorResponseDto> handleEmployeeNotCreatedException(final EmployeeNotCreatedException employeeNotCreatedException) {
