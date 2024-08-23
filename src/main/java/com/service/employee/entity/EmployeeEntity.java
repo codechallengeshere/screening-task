@@ -3,11 +3,11 @@ package com.service.employee.entity;
 import com.service.employee.enumeration.DepartmentEnumeration;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
@@ -43,7 +43,7 @@ public class EmployeeEntity {
     @Column(name = "department", nullable = false, length = 50)
     private DepartmentEnumeration departmentEnumeration;
 
-    @NotNull
-    @Column(name = "employed_at")
+    @CreationTimestamp
+    @Column(name = "employed_at", nullable = false)
     private Date employedAt;
 }

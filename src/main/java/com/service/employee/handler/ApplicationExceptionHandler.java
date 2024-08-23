@@ -1,9 +1,9 @@
 package com.service.employee.handler;
 
 import com.service.employee.component.JsonComponent;
-import com.service.employee.constant.ApplicationErrorCode;
-import com.service.employee.constant.ApplicationErrorMessage;
-import com.service.employee.dto.ApiErrorResponse;
+import com.service.employee.constant.ApplicationErrorCodeConstant;
+import com.service.employee.constant.ApplicationErrorMessageConstant;
+import com.service.employee.dto.ApiErrorResponseDto;
 import com.service.employee.exception.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,67 +29,67 @@ public class ApplicationExceptionHandler {
     private final JsonComponent jsonComponent;
 
     @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleEmployeeNotFoundException(final EmployeeNotFoundException employeeNotFoundException) {
+    public ResponseEntity<ApiErrorResponseDto> handleEmployeeNotFoundException(final EmployeeNotFoundException employeeNotFoundException) {
         log.error("ApplicationExceptionHandler#handleEmployeeNotFoundException: start: " + jsonComponent.convertObjectToJsonString(employeeNotFoundException));
 
         final var httpStatus = employeeNotFoundException.getHttpStatus();
 
-        final var apiErrorResponse = getApiErrorResponse(employeeNotFoundException);
+        final var apiErrorResponseDto = getApiErrorResponseDto(employeeNotFoundException);
 
-        log.debug("ApplicationExceptionHandler#handleEmployeeNotFoundException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponse));
-        return new ResponseEntity<>(apiErrorResponse, httpStatus);
+        log.debug("ApplicationExceptionHandler#handleEmployeeNotFoundException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
     }
 
     @ExceptionHandler(EmployeeNotCreatedException.class)
-    public ResponseEntity<ApiErrorResponse> handleEmployeeNotCreatedException(final EmployeeNotCreatedException employeeNotCreatedException) {
+    public ResponseEntity<ApiErrorResponseDto> handleEmployeeNotCreatedException(final EmployeeNotCreatedException employeeNotCreatedException) {
         log.error("ResetPasswordController#handleEmployeeNotCreatedException: start: " + jsonComponent.convertObjectToJsonString(employeeNotCreatedException));
 
         final var httpStatus = employeeNotCreatedException.getHttpStatus();
 
-        final var apiErrorResponse = getApiErrorResponse(employeeNotCreatedException);
+        final var apiErrorResponseDto = getApiErrorResponseDto(employeeNotCreatedException);
 
-        log.debug("ResetPasswordController#handleEmployeeNotCreatedException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponse));
-        return new ResponseEntity<>(apiErrorResponse, httpStatus);
+        log.debug("ResetPasswordController#handleEmployeeNotCreatedException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
     }
 
     @ExceptionHandler(DepartmentNotValidException.class)
-    public ResponseEntity<ApiErrorResponse> handleDepartmentNotValidException(final DepartmentNotValidException departmentNotValidException) {
+    public ResponseEntity<ApiErrorResponseDto> handleDepartmentNotValidException(final DepartmentNotValidException departmentNotValidException) {
         log.error("ApplicationExceptionHandler#handleDepartmentNotValidException: start: " + jsonComponent.convertObjectToJsonString(departmentNotValidException));
 
         final var httpStatus = HttpStatus.BAD_REQUEST;
 
         final var apiException = new ApiException(
-                ApplicationErrorCode.ERROR_CODE__DEPARTMENT_NOT_VALID_ERROR,
-                ApplicationErrorMessage.ERROR_MESSAGE__DEPARTMENT_NOT_VALID,
+                ApplicationErrorCodeConstant.ERROR_CODE__DEPARTMENT_NOT_VALID_ERROR,
+                ApplicationErrorMessageConstant.ERROR_MESSAGE__DEPARTMENT_NOT_VALID,
                 httpStatus
         );
 
-        final var apiErrorResponse = getApiErrorResponse(apiException);
+        final var apiErrorResponseDto = getApiErrorResponseDto(apiException);
 
-        log.debug("ApplicationExceptionHandler#handleIllegalArgumentException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponse));
-        return new ResponseEntity<>(apiErrorResponse, httpStatus);
+        log.debug("ApplicationExceptionHandler#handleIllegalArgumentException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    protected ResponseEntity<ApiErrorResponse> handleHttpMessageNotReadableException(final HttpMessageNotReadableException httpMessageNotReadableException) {
+    protected ResponseEntity<ApiErrorResponseDto> handleHttpMessageNotReadableException(final HttpMessageNotReadableException httpMessageNotReadableException) {
         log.error("ApplicationExceptionHandler#handleHttpMessageNotReadableException: start");
 
         final var httpStatus = HttpStatus.BAD_REQUEST;
 
         final var apiException = new ApiException(
-                ApplicationErrorCode.ERROR_CODE__VALIDATION_ERROR,
-                ApplicationErrorMessage.ERROR_MESSAGE__MISSING_REQUIRED_PARAMS,
+                ApplicationErrorCodeConstant.ERROR_CODE__VALIDATION_ERROR,
+                ApplicationErrorMessageConstant.ERROR_MESSAGE__MISSING_REQUIRED_PARAMS,
                 httpStatus
         );
 
-        final var apiErrorResponse = getApiErrorResponse(apiException);
+        final var apiErrorResponseDto = getApiErrorResponseDto(apiException);
 
-        log.debug("ApplicationExceptionHandler#handleHttpMessageNotReadableException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponse));
-        return new ResponseEntity<>(apiErrorResponse, httpStatus);
+        log.debug("ApplicationExceptionHandler#handleHttpMessageNotReadableException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<ApiErrorResponse> handleMethodArgumentNotValidException(
+    protected ResponseEntity<ApiErrorResponseDto> handleMethodArgumentNotValidException(
             final MethodArgumentNotValidException methodArgumentNotValidException
     ) {
         final Map<String, String> errors = new HashMap<>();
@@ -110,29 +110,29 @@ public class ApplicationExceptionHandler {
         final var httpStatus = HttpStatus.BAD_REQUEST;
 
         final var apiException = new ApiException(
-                ApplicationErrorCode.ERROR_CODE__VALIDATION_ERROR,
+                ApplicationErrorCodeConstant.ERROR_CODE__VALIDATION_ERROR,
                 jsonComponent.convertObjectToJsonString(errors),
                 httpStatus
         );
 
-        final var apiErrorResponse = getApiErrorResponse(apiException);
+        final var apiErrorResponseDto = getApiErrorResponseDto(apiException);
 
-        log.debug("ApplicationExceptionHandler#handleMethodArgumentNotValidException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponse));
-        return new ResponseEntity<>(apiErrorResponse, httpStatus);
+        log.debug("ApplicationExceptionHandler#handleMethodArgumentNotValidException: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        return new ResponseEntity<>(apiErrorResponseDto, httpStatus);
     }
 
-    private ApiErrorResponse getApiErrorResponse(
+    private ApiErrorResponseDto getApiErrorResponseDto(
             final BaseException applicationException
     ) {
-        log.trace("ApplicationExceptionHandler#getApiErrorResponse: start: " + jsonComponent.convertObjectToJsonString(applicationException));
+        log.trace("ApplicationExceptionHandler#getApiErrorResponseDto: start: " + jsonComponent.convertObjectToJsonString(applicationException));
 
-        final var apiErrorResponse = ApiErrorResponse.builder()
+        final var apiErrorResponseDto = ApiErrorResponseDto.builder()
                 .errorCode(applicationException.getErrorCode())
                 .errorMessage(applicationException.getErrorMessage())
                 .statusCode(applicationException.getHttpStatus().value())
                 .build();
 
-        log.trace("ApplicationExceptionHandler#getApiErrorResponse: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponse));
-        return apiErrorResponse;
+        log.trace("ApplicationExceptionHandler#getApiErrorResponseDto: end: " + jsonComponent.convertObjectToJsonString(apiErrorResponseDto));
+        return apiErrorResponseDto;
     }
 }
