@@ -32,7 +32,7 @@ class EmployeeController_createEmployeeIT extends EmployeeApplicationIntegration
                 .department(department)
                 .build();
 
-        final EmployeeEntity employeeEntity = entityMapperSpy.fromDto(createEmployeeRequestDto);
+        final EmployeeEntity employeeEntity = entityMapper.fromDto(createEmployeeRequestDto);
         employeeEntity.setId(employeeId);
         employeeEntity.setEmployedAt(employedAt);
 

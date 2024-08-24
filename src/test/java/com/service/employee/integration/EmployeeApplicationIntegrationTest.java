@@ -7,7 +7,6 @@ import com.service.employee.repository.EmployeeRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.mapstruct.factory.Mappers;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.health.HealthEndpointAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -47,17 +46,15 @@ public abstract class EmployeeApplicationIntegrationTest {
     @Autowired
     protected ObjectMapper objectMapper;
 
-    @Spy
-    protected EmployeeMapper entityMapperSpy;
-
     @MockBean
     protected EmployeeRepository employeeRepositoryMockBean;
 
+    protected EmployeeMapper entityMapper;
     protected Faker faker;
 
     @BeforeEach
     void beforeEach() {
-        this.entityMapperSpy = Mappers.getMapper(EmployeeMapper.class);
+        this.entityMapper = Mappers.getMapper(EmployeeMapper.class);
         this.faker = new Faker();
     }
 
