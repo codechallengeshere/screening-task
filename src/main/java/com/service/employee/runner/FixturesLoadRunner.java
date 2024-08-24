@@ -6,7 +6,6 @@ import com.service.employee.enumeration.DepartmentEnumeration;
 import com.service.employee.repository.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -29,7 +28,6 @@ public class FixturesLoadRunner implements ApplicationRunner {
     private final EmployeeRepository employeeRepository;
     private final Faker faker;
 
-    @Autowired
     public FixturesLoadRunner(final EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
         this.faker = new Faker();
