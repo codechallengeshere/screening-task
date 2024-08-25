@@ -28,9 +28,12 @@ public class FixturesLoadRunner implements ApplicationRunner {
     private final EmployeeRepository employeeRepository;
     private final Faker faker;
 
-    public FixturesLoadRunner(final EmployeeRepository employeeRepository) {
+    public FixturesLoadRunner(
+            final EmployeeRepository employeeRepository,
+            final Faker faker
+    ) {
         this.employeeRepository = employeeRepository;
-        this.faker = new Faker();
+        this.faker = faker;
     }
 
     @Override

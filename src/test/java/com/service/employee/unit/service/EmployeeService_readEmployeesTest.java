@@ -48,7 +48,7 @@ class EmployeeService_readEmployeesTest extends EmployeeApplicationUnitTest {
 
         final int capacity = 10;
         final List<EmployeeEntity> employeeEntities = new ArrayList<>(capacity);
-        for (int i = 0; i <= capacity; i++) {
+        for (int i = 0; i < capacity; i++) {
             final EmployeeEntity employeeEntity = EmployeeEntity.builder()
                     .name(faker.name().firstName())
                     .department(departmentEnumerations[RandomUtils.nextInt(0, departmentEnumerations.length)])
@@ -82,7 +82,7 @@ class EmployeeService_readEmployeesTest extends EmployeeApplicationUnitTest {
 
         final int capacity = 10;
         final List<EmployeeEntity> employeeEntities = new ArrayList<>(capacity);
-        for (int i = 0; i <= capacity; i++) {
+        for (int i = 0; i < capacity; i++) {
             final EmployeeEntity employeeEntity = EmployeeEntity.builder()
                     .name(faker.name().firstName())
                     .department(departmentEnumerations[RandomUtils.nextInt(0, departmentEnumerations.length)])
@@ -117,7 +117,7 @@ class EmployeeService_readEmployeesTest extends EmployeeApplicationUnitTest {
 
         final int capacity = 10;
         final List<EmployeeEntity> employeeEntities = new ArrayList<>(capacity);
-        for (int i = 0; i <= capacity; i++) {
+        for (int i = 0; i < capacity; i++) {
             final EmployeeEntity employeeEntity = EmployeeEntity.builder()
                     .name(faker.name().firstName())
                     .department(departmentEnumeration)
@@ -152,7 +152,7 @@ class EmployeeService_readEmployeesTest extends EmployeeApplicationUnitTest {
 
         final int capacity = 10;
         final List<EmployeeEntity> employeeEntities = new ArrayList<>(capacity);
-        for (int i = 0; i <= capacity; i++) {
+        for (int i = 0; i < capacity; i++) {
             final EmployeeEntity employeeEntity = EmployeeEntity.builder()
                     .name(faker.name().firstName())
                     .department(departmentEnumeration)

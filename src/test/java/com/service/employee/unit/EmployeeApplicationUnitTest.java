@@ -26,8 +26,8 @@ public abstract class EmployeeApplicationUnitTest {
 
         this.jsonComponent = new JsonComponent(objectMapper);
         this.faker = new Faker();
-
         this.entityMapper = Mappers.getMapper(EmployeeMapper.class);
+
         this.employeeRepositoryMock = Mockito.mock(EmployeeRepository.class);
     }
 

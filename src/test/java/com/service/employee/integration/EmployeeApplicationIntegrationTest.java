@@ -46,16 +46,17 @@ public abstract class EmployeeApplicationIntegrationTest {
     @Autowired
     protected ObjectMapper objectMapper;
 
+    @Autowired
+    protected Faker faker;
+
     @MockBean
     protected EmployeeRepository employeeRepositoryMockBean;
 
     protected EmployeeMapper entityMapper;
-    protected Faker faker;
 
     @BeforeEach
     void beforeEach() {
         this.entityMapper = Mappers.getMapper(EmployeeMapper.class);
-        this.faker = new Faker();
     }
 
     @AfterEach
